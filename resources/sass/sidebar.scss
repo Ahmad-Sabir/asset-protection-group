@@ -1,0 +1,89 @@
+.sidebar {
+    nav{
+        height: 100vh;
+        ul {
+            li {
+                position: relative;
+                padding: 16px 0 10px 20px;
+                span {
+                    cursor: pointer;
+                    display: block;
+                    width: 100%;
+                }
+                a {
+                    display: flex;
+                    color: $gray1;
+                    font-size: 16px;
+                    text-transform: capitalize;
+                    @include media-1365 {
+                        font-size: 14px;
+                    }
+                    em, svg {
+                        font-size: 14px;
+                        margin: 2px 12px 0 0;
+                        width: 18px;
+                        text-align: center;
+                        display: block;
+                        position: relative;
+                        fill: $gray1;
+                        max-height: 16px;
+                    }
+                    &:hover {
+                        color: $primary;
+                        svg {
+                            fill: $primary;
+                        }
+                    }
+                }
+                &.active {
+                    a {
+                        color: $primary;
+                        svg {
+                            fill: $primary;
+                        }
+                    }
+                    &::before {
+                        content: "";
+                        width: 3px;
+                        height: 24px;
+                        background-color: $primary;
+                        position: absolute;
+                        left: 0;
+                    }
+                }
+                .accordion-collapse {
+                    li {
+                        padding-left: 29px;
+                        a {
+                            .fa-angle-down {
+                                position: absolute;
+                                right: 0;
+                            }
+
+                        }
+                    }
+                }
+                .fa-angle-down {
+                    position: absolute;
+                    right: 0;
+                    transition-duration: 500ms;
+                }
+                .arrow-right {
+                    transform: rotate(-90deg);
+                }
+            }
+        }
+        .sidebar-footer {
+            position: absolute;
+            bottom: 12%;
+            left: 20px;
+            @include media-767{
+                bottom: 17%;
+            }
+            p {
+                color: $gray2;
+                font-size: 14px;
+            }
+        }
+    }
+}

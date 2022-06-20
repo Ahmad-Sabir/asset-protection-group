@@ -1,0 +1,144 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - '*'
+    exclude:
+      - 'README.md'
+      - 'CHANGELOG.md'
+
+pr:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'ubuntu-20.04'
+
+variables:
+  phpVersion: 8.1
+
+stages:
+- stage: buildPackage
+  displayName: 'Build and Package'
+  jobs:
+  - job: build
+    displayName: 'Build and Test'
+    steps:
+    - script: |
+        sudo update-alternatives --set php /usr/bin/php$(phpVersion)
+        sudo update-alternatives --set phar /usr/bin/phar$(phpVersion)
+        sudo update-alternatives --set phpdbg /usr/bin/phpdbg$(phpVersion)
+        sudo update-alternatives --set php-cgi /usr/bin/php-cgi$(phpVersion)
+        sudo update-alternatives --set phar.phar /usr/bin/phar.phar$(phpVersion)
+        php -version
+      displayName: 'Using PHP version $(phpVersion)'
+
+    - script: |
+        composer install --no-interaction --prefer-dist
+        cp .env.example .env
+        php artisan key:generate
+      displayName: 'Install Composer Dependencies & Setup'
+
+#    - script: |
+#        composer analyze
+#      displayName: 'Code Analysis'
+
+    - script: |
+        composer check
+      displayName: 'PSR12 Coding Standards Check'
+
+    - script: |
+        composer cpd-check
+      displayName: 'Code Duplication Check'
+
+    - script: |
+        composer test-coverage
+        rm -f .env
+      displayName: 'Running Test Suite'
+
+    - script: |
+        php $(System.DefaultWorkingDirectory)/.githooks/coverage-checker.php $(System.DefaultWorkingDirectory)/public/build/coverage/clover.xml 85
+      continueOnError: true
+      displayName: 'Code Coverage Check'
+
+    - task: PublishCodeCoverageResults@1
+      continueOnError: true
+      displayName: "Publish Code Coverage Results"
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '$(System.DefaultWorkingDirectory)/public/build/coverage/cobertura.xml'
+        pathToSources: '$(System.DefaultWorkingDirectory)'
+        failIfCoverageEmpty: true
+
+    - task: PublishTestResults@2
+      continueOnError: true
+      displayName: "Publish Test Results"
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/public/build/coverage/junit.xml'
+        mergeTestResults: true
+        testRunTitle: 'Test Suite'
+
+    - task: SonarQubePrepare@4
+      displayName: "Prepare SonarQube Analysis"
+      condition: eq(variables['Build.SourceBranchName'], 'master')
+      inputs:
+        SonarQube: 'cc-sonarqube'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'apg'
+        cliProjectName: 'Assets protection group'
+        cliSources: '.'
+        extraProperties: |
+          sonar.exclusions=**/*.blade.php,**/public/**,resources/js/googlemaps.js,config/cors.php
+          sonar.sourceEncoding=UTF-8
+          sonar.coverage.exclusions=app/Http/Livewire/Reports/Assets.php,app/Services/Admin/Asset/LocationService.php,app/Http/Middleware/TrustHosts.php,app/Providers/BroadcastServiceProvider.php,helpers/Constants.php,helpers/StringFunctions.php,tailwind.config.js,lang/en/**,bootstrap/**,config/**,database/**,resources/**,routes/**,tests/**,server.php,webpack.mix.js
+          sonar.cobertura.reportPath=$(System.DefaultWorkingDirectory)/public/build/coverage/cobertura.xml
+          sonar.clover.reportPath=$(System.DefaultWorkingDirectory)/public/build/coverage/clover.xml
+          sonar.php.tests.reportPath=$(System.DefaultWorkingDirectory)/public/build/coverage/junit.xml
+          sonar.php.coverage.reportPaths=$(System.DefaultWorkingDirectory)/public/build/coverage/clover.xml
+          sonar.scm.provider=git
+
+    - task: SonarQubeAnalyze@4
+      condition: eq(variables['Build.SourceBranchName'], 'master')
+      displayName: "Run SonarQube Analysis"
+
+    - task: SonarQubePublish@4
+      condition: eq(variables['Build.SourceBranchName'], 'master')
+      displayName: "Publish SonarQube Analysis"
+      inputs:
+        pollingTimeoutSec: '300'
+
+    - script: |
+        php artisan cache:clear
+        php artisan config:clear
+        php artisan debug:clear
+        php artisan optimize:clear
+        php artisan route:clear
+        php artisan view:clear
+        rm -rf $(System.DefaultWorkingDirectory)/public/build
+        rm -rf $(System.DefaultWorkingDirectory)/vendor
+      displayName: 'Perform Cleanup'
+
+  - job: package
+    displayName: 'Package Artifact'
+    dependsOn: build
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    steps:
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        ArtifactName: 'apg'
+        publishLocation: 'Container'

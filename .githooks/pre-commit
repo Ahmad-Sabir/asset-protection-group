@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+PWD=`pwd`
+PHP_PATH=`which php`
+COMPOSER_PATH=`which composer`
+echo "Running Pre-Commit Checks"
+
+echo "Running PHPStan Static Analysis"
+sh -c "$PHP_PATH $COMPOSER_PATH static-analysis"
+
+echo "Running CodeSniffer to Check for PSR12 Coding Standard Issues"
+sh -c "$PHP_PATH $COMPOSER_PATH check"
+
+echo "Running Copy/Paste Detector"
+sh -c "$PHP_PATH $COMPOSER_PATH cpd-check"
+
+echo "Running Test Suite"
+sh -c "$PHP_PATH $COMPOSER_PATH test-coverage"
+sh -c "$PHP_PATH $PWD/.githooks/coverage-checker.php $PWD/public/build/coverage/clover.xml 85"

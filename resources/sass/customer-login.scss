@@ -1,0 +1,272 @@
+.customer-heading {
+    color: $primary;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 30px;
+    @include media-480 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.customer-login {
+    display: flex;
+    @include media-767 {
+        position: relative;
+    }
+    .banner {
+        width: 40%;
+        max-width: 500px;
+        height: 100vh;
+        background-image: url("/assets/images/customer-login-bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 10px solid $primary;
+        @include media-990 {
+            width: 50%;
+        }
+        @include media-767 {
+            width: 100%;
+            padding: 10px;
+            max-width: 100%;
+        }
+        .img-container {
+            width: 150px;
+            height: 80px;
+            @include media-767 {
+                width: 100px;
+                height: 50px;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+        .slider {
+            padding: 5px 0px;
+            .banner-slider {
+                width: 100%;
+                .carousel-indicators {
+                    margin-left: 10px;
+                    button {
+                        background-color: $white;
+                    }
+                }
+                .carousel-item {
+                    width: 100%;
+                    height: 200px;
+                    img {
+                        opacity: 0;
+                    }
+                }
+                .carousel-caption {
+                    width: 100%;
+                    left: 0;
+                    position: absolute;
+                    p {
+                        color: $white;
+                        text-align: left;
+                        margin: 5px 0px;
+                        @include media-480 {
+                            padding: 5px;
+                        }
+                    }
+                    h2 {
+                        color: $white;
+                        text-align: left;
+                        line-height: 50px;
+                        font-size: 40px;
+                        font-weight: bold;
+                        @include media-990 {
+                            font-size: 34px;
+                            line-height: 40px;
+                        }
+                        @include media-767 {
+                            font-size: 30px;
+                            line-height: 35px;
+                        }
+                        @include media-480 {
+                            font-size: 26px;
+                            padding: 5px;
+                        }
+                    }
+                }
+            }
+            .banner-bottom {
+                width: 100%;
+                margin: 20px 0px;
+                @include media-767 {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .banner-icon-container {
+                    color: $white;
+                    display: flex;
+                    margin: 50px 0;
+                    em {
+                        margin-right: 20px;
+                    }
+                    @include media-767 {
+                        margin: 0;
+                        width: 30%;
+                    }
+                }
+                svg {
+                    color: $white;
+                }
+                .banner-bottom-text {
+                    width: 100%;
+                    display: flex;
+                    margin-top: 20px;
+                    @include media-767 {
+                        margin-top: 0px;
+                        width: auto;
+                    }
+                    a {
+                        color: $white;
+                        margin-right: 14px;
+                        @include media-767 {
+                            margin-right: 0px;
+                            margin-left: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .form {
+        width: 100%;
+        height: 100vh;
+        background-color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+        @include media-990 {
+            width: 50%;
+        }
+        @include media-767 {
+            width: 100%;
+            position: absolute;
+            top: -100px;
+            left: -5px;
+            background-color: transparent;
+        }
+        .form-container {
+            width: 400px;
+            @include media-990 {
+                width: 80%;
+            }
+            @include media-767 {
+                width: 100%;
+                overflow-y: auto;
+            }
+            @include media-767 {
+                background-color: $white;
+                border-radius: 5px;
+                padding: 10px;
+                max-height: 50%;
+                position: relative;
+            }
+            h3 {
+                color: $primary;
+                font-weight: bold;
+            }
+            .form-group {
+                width: 100%;
+                position: relative;
+                input {
+                    width: 100%;
+                    @include media-480 {
+                        margin: 0;
+                    }
+                }
+                label {
+                    color: $gray3;
+                }
+                em {
+                    position: absolute;
+                    right: 10px;
+                    top: 42px;
+                    font-size: 14px;
+                    color: $primary;
+                    cursor: pointer;
+                }
+            }
+            .checkbox-container {
+                display: flex;
+                align-items: center;
+                color: $gray3;
+            }
+            .btn {
+                margin: 6px 0;
+                padding: 16px;
+            }
+            .login-btn-wrap {
+                position: relative;
+                @include media-480 {
+                    display: block;
+                }
+            }
+            .forget-password {
+                text-align: right;
+                max-width: 400px;
+                color: $primary;
+                display: block;
+                margin-top: 10px;
+                
+                @include media-480 {
+                    position: relative;
+                    bottom: 22px;
+                    display: block;
+                    text-align: right;
+                    width: 100%;
+                    top: -24px;
+                }
+                @include media-767{
+                    top: -5px;
+                }
+            }
+            .form-check {
+                .form-check-input:checked {
+                    background-color: $primary;
+                    border-color: $gray3;
+                    &:checked:hover,
+                    &:checked:focus {
+                        background-color: $primary;
+                        box-shadow: none;
+                        border-color: $primary;
+                        outline: 0;
+                    }
+                }
+                span {
+                    position: relative;
+                    left: 8px;
+                    top: 2px;
+                    color: $gray3;
+                }
+            }
+
+            .back-login {
+                color: $primary;
+                margin-top: 10px;
+                em {
+                    font-weight: bold;
+                    font-size: 20px;
+                    position: relative;
+                    top: 2px;
+                    padding-right: 4px;
+                }
+            }
+        }
+    }
+}

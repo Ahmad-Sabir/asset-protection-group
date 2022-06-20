@@ -1,0 +1,12 @@
+{
+    "debug": true,
+    "port": 6001,
+    "appManager.array.apps": [
+        {
+            "id": "apg-app-id",
+            "key": "apg-app-key",
+            "secret": "asdflkjasldjflaskfqiue12u301283120",
+            "webhooks": []
+        }
+    ]
+}

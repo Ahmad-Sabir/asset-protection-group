@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="117" height="117" viewBox="0 0 117 117">
+  <defs>
+    <clipPath id="clip-path">
+      <circle id="Ellipse_11" data-name="Ellipse 11" cx="58.5" cy="58.5" r="58.5" fill="#e8eaec"/>
+    </clipPath>
+  </defs>
+  <g id="Group_65" data-name="Group 65" transform="translate(-1496 -244)">
+    <circle id="Ellipse_9" data-name="Ellipse 9" cx="58.5" cy="58.5" r="58.5" transform="translate(1496 244)" fill="#e8eaec"/>
+    <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(1496 244)" clip-path="url(#clip-path)">
+      <text id="user" transform="translate(58 108)" fill="#f7f8fa" font-size="92" font-family="FontAwesome5Pro-Solid, 'Font Awesome \35  Pro'"><tspan x="-40" y="0">USER</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,100 @@
+.right-sidebar {
+    background-color: $white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    width: 450px;
+    overflow-x: auto;
+    @include scroll;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+        var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    outline: 0;
+    @include media-767{
+        width: 100%;
+    }
+    .right-sidebar-header {
+        h5 {
+            color: $secondary;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 20px;
+            a {
+                em {
+                    color: $gray1;
+                    font-size: 20px;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .right-sidebar-content {
+        padding-top: 60px;
+        .admin-table {
+            td{
+                padding: 15px;
+                min-width: 118px;
+                overflow-wrap: anywhere;
+                text-align: left;
+            }
+            tbody tr:hover {
+                background-color: transparent !important;
+            }
+        }
+        form {
+            padding: 0 32px;
+            @include media-767{
+                padding: 0px;
+            }
+            .upload-image {
+                display: flex;
+                align-items: center;
+                .image {
+                    width: 120px;
+                    height: 120px;
+                    overflow: hidden;
+                    border-radius: 100px;
+                    margin-right: 20px;
+                    img {
+                        width: 100%;
+                    }
+                }
+                .profile-name {
+                    .full-name {
+                        span {
+                            color: #000;
+                            font-style: normal;
+                        }
+                    }
+                    span {
+                        color: $red;
+                        font-style: italic;
+                    }
+                }
+            }
+            .form-group {
+                input {
+                    width: 100%;
+                }
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+        .calender-field{
+            min-width: auto;
+        }
+        .selectr-container {
+            .selectr-options-container {
+                .selectr-input-container {
+                    input {
+                        width: 90%;
+                    }
+                }
+            }
+        }
+    }
+}

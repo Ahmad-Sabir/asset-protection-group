@@ -1,0 +1,75 @@
+.selectr-wrap {
+    min-width: 300px;
+    @include media-990{
+        min-width: auto;
+    }
+    .selectr-selected {
+        border: 2px solid $gray-border;
+        color: $gray1;
+        background: $gray4;
+        height: 47px;
+    }
+    .selectr-label {
+        width: 300px;
+        line-height: 30px;
+    }
+    .selectr-container.open {
+        .selectr-selected {
+        border-color: $primary $primary transparent;
+        }
+        &.inverted {
+            .selectr-options-container {
+                border-color: $primary;
+                border-width: 2px 2px 0px;
+            }
+            .selectr-selected {
+                border-color: $primary $primary transparent;
+                border-bottom: 2px solid $primary ;
+                border-top: 0;
+            }
+        }
+    }
+    .selectr-options-container {
+        border-color: $primary;
+        border-width: 0 2px 2px;
+        .selectr-input-container {
+            background: $gray4;
+            [type="search"] {
+                border-color: $gray-border;
+                &:focus {
+                    --tw-ring-color: $primary;
+                }
+            }
+        }
+        .selectr-options {
+            background: $gray4;
+            .selectr-option {
+                &.selected {
+                    background-color: $primary-light;
+                }
+                &.active {
+                    background-color: $primary-light;
+                    color: $secondary;
+                }
+            }
+        }
+    }
+    .selectr-tag {
+        background: $primary-light;
+        color: $gray1;
+        font-size: 16px;
+        border-radius: 100px;
+        padding: 7px 54px 7px 22px;
+        margin: 4px 6px 6px 2px;
+        button {
+            right: 20px;
+            &::before,
+            &::after {
+                background-color: $gray1;
+                width: 2px;
+                top: 3px;
+            }
+        }
+    }
+
+}

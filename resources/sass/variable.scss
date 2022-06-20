@@ -1,0 +1,159 @@
+$primary: #ff4a17;
+$primary-light: #fff2ef;
+$secondary: #14212b;
+$white: #fff;
+$gray-border: #dadee4;
+$gray1: #788090;
+$gray2: #a3a9b4;
+$gray3: #b0b4c0;
+$gray4: #f7f8fa;
+$gray5: #a5abb7;
+$gray6: #b0b4bb;
+$gray7: #c4cad5;
+$red: #ff0000;
+$red2: #e53d3d;
+$blue: #0080ff;
+$green: #2cbc74;
+
+.primary {
+    color: $primary;
+}
+.primary-light {
+    color: $primary-light;
+}
+.secondary {
+    color: $secondary;
+}
+.gray-border {
+    color: $gray-border;
+}
+.gray1 {
+    color: $gray1;
+}
+.gray2 {
+    color: $gray2;
+}
+.gray3 {
+    color: $gray3;
+}
+.gray4 {
+    color: $gray4;
+}
+.gray5 {
+    color: $gray5;
+}
+.gray6 {
+    color: $gray6;
+}
+.gray7 {
+    color: $gray7;
+}
+.red {
+    color: $red;
+}
+.red2 {
+    color: $red2;
+}
+.blue {
+    color: $blue;
+}
+.white {
+    color: $white;
+}
+.green {
+    color: $green;
+}
+
+$Axiforma: "Axiforma", sans-serif;
+$FontAwesome: "Font Awesome 6 Free";
+
+@mixin media-1500 {
+    @media screen and (max-width: 1500px) {
+        @content;
+    }
+}
+
+@mixin media-1365 {
+    @media screen and (max-width: 1365px) {
+        @content;
+    }
+}
+
+@mixin media-1199 {
+    @media screen and (max-width: 1199px) {
+        @content;
+    }
+}
+
+@mixin media-1023 {
+    @media screen and (max-width: 1023px) {
+        @content;
+    }
+}
+
+@mixin media-990 {
+    @media screen and (max-width: 990px) {
+        @content;
+    }
+}
+
+@mixin media-767 {
+    @media screen and (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin media-480 {
+    @media screen and (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin media-375 {
+    @media screen and (max-width: 375px) {
+        @content;
+    }
+}
+
+@mixin scroll {
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 3px;
+        display: block;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        border-radius: 6px;
+        background: transparent;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: $secondary;
+        border-radius: 6px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: $secondary;
+    }
+
+    // For Internet Explorer
+    & {
+        scrollbar-face-color: $secondary;
+        scrollbar-track-color: $secondary;
+    }
+}
+
+@mixin scroll-onhover-show {
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            background: $gray4;
+        }
+    }
+}

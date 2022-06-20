@@ -1,0 +1,178 @@
+.image-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    .image-carousel-inner {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .slider-backward {
+            position: absolute;
+            z-index: 30;
+            cursor: pointer;
+            margin-left: 2.5rem;
+            left: 0;
+            em {
+                color: $white;
+                font-size: 30px;
+            }
+        }
+        .slider-forward {
+            position: absolute;
+            z-index: 30;
+            cursor: pointer;
+            margin-right: 2.5rem;
+            right: 0;
+            em {
+                color: $white;
+                font-size: 30px;
+            }
+        }
+        .slider-wrapper {
+            width: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+            .slider-wrapper-inner {
+                display: flex;
+                gap: 0.8rem;
+                justify-content: flex-start;
+                align-items: center;
+                transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+                transition-duration: 700ms;
+                .image-slider {
+                    display: flex;
+                    flex-shrink: 0;
+                    position: relative;
+                    max-width: 660px;
+                    height: 350px;
+                    img {
+                        object-fit: cover;
+                        object-position: center;
+                        width: 100%;
+                    }
+                    em {
+                        position: absolute;
+                        bottom: 16px;
+                        right: 12px;
+                        color: $white;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+        .imagesContainer {
+            display: flex;
+            .image {
+                width: 660px;
+                height: 350px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+                border-radius: 5px;
+                margin-right: 15px;
+                overflow: hidden;
+                .image-text {
+                    width: 100%;
+                    height: 100%;
+                    z-index: 4;
+                    &:hover {
+                        cursor: pointer;
+                        z-index: 2;
+                        background: linear-gradient(
+                            rgba(0, 0, 0, 0.6),
+                            rgba(0, 0, 0, 0.6)
+                        );
+                        div {
+                            position: absolute;
+                            bottom: 15px;
+                            right: 25px;
+                            font-size: 1.2em;
+                            cursor: zoom-in;
+                            z-index: 7;
+                            i {
+                                display: inline-block;
+                            }
+                        }
+                    }
+                    div {
+                        i {
+                            font-size: 20px;
+                            color: $white;
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.imagePop {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    display: none;
+    .click1 {
+        position: absolute;
+        z-index: 14;
+        top: 50%;
+        left: 5%;
+        cursor: pointer;
+        color: #fff;
+    }
+    .click2 {
+        position: absolute;
+        z-index: 14;
+        top: 50%;
+        right: 5%;
+        cursor: pointer;
+        color: #fff;
+    }
+    .close {
+        position: absolute;
+        z-index: 14;
+        top: 5%;
+        right: 5%;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .imagePopUnder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 12;
+        &:hover {
+            cursor: zoom-out;
+        }
+    }
+    .imageContain {
+        position: relative;
+        top: 25%;
+        left: -20%;
+        width: 660px;
+        height: 350px;
+        z-index: 12;
+        margin: 5vh 30%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    @keyframes he {
+        100% {
+            left: 0;
+        }
+    }
+}
